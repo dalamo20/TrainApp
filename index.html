@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="./assets/css/style.css">
     <title>Train App</title>
 </head>
@@ -43,13 +42,27 @@
         </form>
         <div class="resultsElem">
             <header>Current Train Schedule</header>
-            <div id="searchResults"></div>
+            <div id="train-schedule"></div>
             <br>
         </div>
     </div>
+
+    <script src="https://www.gstatic.com/firebasejs/4.13.0/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyALuPAUowXSzNBbBEePaTtfCZSqFuAyRY4",
+            authDomain: "trainapp-8fad4.firebaseapp.com",
+            databaseURL: "https://trainapp-8fad4.firebaseio.com",
+            projectId: "trainapp-8fad4",
+            storageBucket: "",
+            messagingSenderId: "190773293127"
+        };
+        firebase.initializeApp(config);
+    </script>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
         crossorigin="anonymous"></script>
-    <script src="./assets/javascript/app.js"></script>
+    <script src="./assets/js/app.js"></script>
 </body>
 
 </html>
