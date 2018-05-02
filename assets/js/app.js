@@ -19,6 +19,7 @@ $(document).ready(function () {
             button.attr("data-schedule-id", keys[i]);
             var span = $("<span>");
             button.text("Remove");
+            span.text(trainComes.task)
             div.append(button);
             div.append(span);
             //add elements to Current Train Schedule
@@ -32,6 +33,13 @@ $(document).ready(function () {
         database.ref().child(scheduleId).remove();
     });
 
-    
+    $("#submitInput").on("click", function () {
+        var userInput = $("#exampleFormControlInput1").val().trim();
+        database.ref().push({
+            task: userInput,
+            createdDate: firebase.database.ServerValue.TIMESTAMP//use for dates&times
+        });
+        $("#exampleFormControlInput1").val("");
+    });
 
 });
