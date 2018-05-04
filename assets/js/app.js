@@ -1,3 +1,9 @@
+//Captains Log: Not quite sure how military time using moments.js supposed to work if
+//user inputs the number alone. I could have made the Current Train Schedule look better formatted with
+//labels above each user input so that users can know what each field means. 
+//I wanted to do something about the spacing between each item so I tried ""
+//between each property on line 35.
+
 //Get starting point from time assignment
 $(document).ready(function () {
     var database = firebase.database();
@@ -54,8 +60,7 @@ $(document).ready(function () {
             train: trainName,
             place: destination,
             time: trainTime,
-            minutes: trainFreq,
-            createdDate: firebase.database.ServerValue.TIMESTAMP//use for dates&times
+            minutes: trainFreq
         });
         //clearing text box when done
         $("#train-name").val("");
