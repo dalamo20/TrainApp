@@ -40,9 +40,9 @@ $(document).ready(function () {
             //get user input to display in seperate columns
             tName.text(trainComes.train);
             tDest.text(trainComes.place);
-            tFreq.text(trainComes.time);
-            tArrive.text(trainComes.minutes);
-            tAway.text(trainComes.place);
+            tFreq.text(trainComes.minutes);
+            tArrive.text(trainComes.nextArrival);
+            tAway.text(trainComes.minutesAway);
             //but append each text to the same row
             row.append(button);
             row.append(tName);
@@ -52,7 +52,14 @@ $(document).ready(function () {
             row.append(tAway);
             //add elements to Current Train Schedule's tbody
             $("#train-schedule").append(row);
-
+            //converting time
+            var tArriveConvert = moment(time, "HH:mm").subtract(1, "years");
+            var currentTime = moment();
+            var diffTime =moment().diff(moment(tArriveConvert), "LT");
+            var tRemain = diffTime % minutes;
+            var minutesAway = minutes - tRemain;
+            var nextArrival = moment().add(minutesAway,"LT");
+        
         }
     });
     //the funciton that executes removal of a schedule
@@ -75,7 +82,7 @@ $(document).ready(function () {
             train: trainName,
             place: destination,
             time: trainTime,
-            minutes: trainFreq
+            minutes: trainFreq,
         });
         //clearing text box when done
         $("#train-name").val("");
