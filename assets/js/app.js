@@ -25,18 +25,33 @@ $(document).ready(function () {
 
             //creating button to delete something from list
 
-            var div = $("<div>");
+            var row = $("<tr>");
             var button = $("<button>");
             button.addClass("remove-schedule");
             //giving button id one of the arrays folder names from database
             button.attr("data-task-id", keys[i]);
             button.text("Remove");
-            var span = $("<span>");
-            span.text(trainComes.train + "" + trainComes.place + "" + trainComes.time + "" + trainComes.minutes);
-            div.append(button);
-            div.append(span);
-            //add elements to Current Train Schedule
-            $("#train-schedule").append(div);
+            //created variables for tdata to go in tbody
+            var tName = $("<td>");
+            var tDest = $("<td>");
+            var tFreq = $("<td>");
+            var tArrive = $("<td>");
+            var tAway = $("<td>");
+            //get user input to display in seperate columns
+            tName.text(trainComes.train);
+            tDest.text(trainComes.place);
+            tFreq.text(trainComes.time);
+            tArrive.text(trainComes.minutes);
+            tAway.text(trainComes.place);
+            //but append each text to the same row
+            row.append(button);
+            row.append(tName);
+            row.append(tDest);
+            row.append(tFreq);
+            row.append(tArrive);
+            row.append(tAway);
+            //add elements to Current Train Schedule's tbody
+            $("#train-schedule").append(row);
 
         }
     });
