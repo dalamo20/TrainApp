@@ -41,8 +41,8 @@ $(document).ready(function () {
             tName.text(trainComes.train);
             tDest.text(trainComes.place);
             tFreq.text(trainComes.minutes);
-            tArrive.text(trainComes.nextArrival);
-            tAway.text(trainComes.minutesAway);
+            tArrive.text(nextArrival);
+            tAway.text(minutesAway);
             //but append each text to the same row
             row.append(button);
             row.append(tName);
@@ -53,12 +53,18 @@ $(document).ready(function () {
             //add elements to Current Train Schedule's tbody
             $("#train-schedule").append(row);
             //converting time
-            var tArriveConvert = moment(time, "HH:mm").subtract(1, "years");
+            var tArriveConvert = moment(trainComes.time, "HH:mm").subtract(1, "years");
+            console.log("this is tArrive" + tArriveConvert);
             var currentTime = moment();
-            var diffTime =moment().diff(moment(tArriveConvert), "LT");
-            var tRemain = diffTime % minutes;
-            var minutesAway = minutes - tRemain;
-            var nextArrival = moment().add(minutesAway,"LT");
+            console.log("current time is" + currentTime);
+            var diffTime = moment().diff(moment(tArriveConvert), "minutes");
+            console.log("this is the diffTime " + diffTime);
+            var tRemain = diffTime % trainComes.minutes;
+            console.log("remainder: " + tRemain);
+            var minutesAway = trainComes.minutes - tRemain;
+            console.log("this is minutes away " + minutesAway);
+            var nextArrival = moment().add(minutesAway, "minutes");
+            console.log("this is next arrival "+ nextArrival);
         
         }
     });
@@ -82,7 +88,7 @@ $(document).ready(function () {
             train: trainName,
             place: destination,
             time: trainTime,
-            minutes: trainFreq,
+            minutes: trainFreq
         });
         //clearing text box when done
         $("#train-name").val("");
