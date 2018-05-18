@@ -30,12 +30,35 @@ $(document).ready(function () {
             var tFreq = $("<td>");
             var tArrive = $("<td>");
             var tAway = $("<td>");
+            
+            //converting time
+            var tArriveConvert = moment(trainComes.time, "HH:mm").subtract(1, "years");
+            // console.log("this is tArrive" + tArriveConvert);
+            var currentTime = moment();
+            // console.log("current time is" + currentTime);
+            var diffTime = moment().diff(moment(tArriveConvert), "minutes");
+            // console.log("this is the diffTime " + diffTime);
+            var tRemain = diffTime % trainComes.minutes;
+            // console.log("remainder: " + tRemain);
+            var nextArrival = moment().add(minutesAway, "minutes");
+            // console.log("this is next arrival "+ nextArrival);
+            
+            var minutesAway = trainComes.minutes - tRemain;
+            console.log("this is minutes away " + minutesAway);
+            var trainArrives = moment(nextArrival).format("LT");
+            console.log("this is train arrives " + trainArrives);
+
             //get user input to display in seperate columns
             tName.text(trainComes.train);
+            console.log(trainComes)
             tDest.text(trainComes.place);
             tFreq.text(trainComes.minutes);
             tArrive.text(trainArrives);
+            console.log("trainArrives = ", trainArrives);
+
             tAway.text(minutesAway);
+            console.log("minutes away = ", minutesAway)
+            
             //but append each text to the same row
             row.append(button);
             row.append(tName);
@@ -45,20 +68,11 @@ $(document).ready(function () {
             row.append(tAway);
             //add elements to Current Train Schedule's tbody
             $("#train-schedule").append(row);
-            //converting time
-            var tArriveConvert = moment(trainComes.time, "HH:mm").subtract(1, "years");
-            console.log("this is tArrive" + tArriveConvert);
-            var currentTime = moment();
-            console.log("current time is" + currentTime);
-            var diffTime = moment().diff(moment(tArriveConvert), "minutes");
-            console.log("this is the diffTime " + diffTime);
-            var tRemain = diffTime % trainComes.minutes;
-            console.log("remainder: " + tRemain);
-            var minutesAway = trainComes.minutes - tRemain;
-            console.log("this is minutes away " + minutesAway);
-            var nextArrival = moment().add(minutesAway, "minutes");
-            console.log("this is next arrival "+ nextArrival);
-            var trainArrives = moment(nextArrival).format("LT");
+
+            // var minutesAway = trainComes.minutes - tRemain;
+            // console.log("this is minutes away " + minutesAway);
+            // var trainArrives = moment(nextArrival).format("LT");
+            // console.log("this is train arrives " + trainArrives);
         
         }
     });
